@@ -2,6 +2,8 @@
 
 A production-style Retrieval-Augmented Generation (RAG) pipeline that lets you chat with your PDF documents. Built with LangChain, FAISS, and OpenAI/Claude APIs, with a Streamlit frontend.
 
+🔗 **Live Demo:** [your-app-url.streamlit.app](your-app-url)
+
 ## 🎯 What This Project Demonstrates
 
 - **RAG Pipeline Architecture**: Document ingestion → chunking → embedding → vector storage → retrieval → LLM generation
