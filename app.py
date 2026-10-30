@@ -26,17 +26,17 @@ def check_index():
     """Check if documents have been indexed."""
     try:
         vs = load_vector_store()
-        return True, vs.index.ntotal
+        return True, vs.index.ntotal, ""
     except FileNotFoundError:
-        return False, 0
+        return False, 0, "⚠️ No documents indexed yet. Run `python ingest.py` first to index your PDFs."
+    except ValueError as e:  # raised by Config.validate() when no API key is set
+        return False, 0, f"🔑 {e} On Streamlit Cloud, add it under Settings → Secrets."
 
 
-index_exists, num_vectors = check_index()
+index_exists, num_vectors, problem = check_index()
 
 if not index_exists:
-    st.error(
-        "⚠️ No documents indexed yet. Run `python ingest.py` first to index your PDFs."
-    )
+    st.error(problem)
     st.stop()
 
 st.success(f"✅ {num_vectors} document chunks indexed and ready.")
