@@ -75,7 +75,7 @@ def ask(question: str, k: int = None) -> Dict:
     sources = []
     for doc in relevant_chunks:
         source = doc.metadata.get("source", "unknown").split("/")[-1]
-        page = doc.metadata.get("page", "?")
+        page = doc.metadata.get("page_label", doc.metadata.get("page", "?"))
         sources.append({"file": source, "page": page})
 
     return {

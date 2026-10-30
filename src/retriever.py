@@ -66,7 +66,7 @@ def retrieve_with_scores(
 
     for doc, score in results:
         source = doc.metadata.get("source", "unknown")
-        page = doc.metadata.get("page", "?")
+        page = doc.metadata.get("page_label", doc.metadata.get("page", "?"))
         logger.debug(f"  Score: {score:.4f} | Source: {source} | Page: {page}")
 
     return results
@@ -83,7 +83,7 @@ def format_context(documents: List[Document]) -> str:
 
     for i, doc in enumerate(documents, 1):
         source = doc.metadata.get("source", "unknown")
-        page = doc.metadata.get("page", "?")
+        page = doc.metadata.get("page_label", doc.metadata.get("page", "?"))
         source_name = source.split("/")[-1] if "/" in source else source
 
         context_parts.append(
